@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Reforma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f5ff; /* fondo azul claro */
+            color: #333;
+            overflow-x: hidden; /* Evitar barra de desplazamiento horizontal */
+        }
+        header {
+            background-color: #d9e4ff; /* azul claro */
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            background-color: #ffffff; /* fondo blanco */
+        }
+        .section-title {
+            color: #4a90e2; /* azul más claro para los títulos */
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .content {
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .image-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .image-group img {
+            width: 15%; /* Tamaño reducido de las imágenes, 15% del ancho del contenedor */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        footer {
+            background-color: #ffd1d1; /* rojo claro */
+            padding: 20px;
+            text-align: center;
+            color: #771a1a;
+        }
+        .contact-info {
+            color: #771a1a; /* texto rojo oscuro sobre fondo claro */
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-transparente */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            object-fit: contain; /* Mantener la proporción de la imagen */
+        }
+        .close {
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            z-index: 999;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .arrow-left {
+            left: 0;
+            margin-top: -22px;
+        }
+        .arrow-right {
+            right: 0;
+            margin-top: -22px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Proyecto Reforma</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2 class="section-title">Descripción del Proyecto</h2>
+            <p class="content">Este proyecto consiste en la reforma de una casa existente, desarrollada con clientes ficticios creados por los alumnos, cada uno con diferentes necesidades. A través de diversas propuestas, buscamos optimizar el espacio y la estética, adaptándonos a sus requerimientos específicos.</p>
+        </section>
+
+        <section>
+            <h2 class="section-title">Galería de Renders</h2>
+            <p class="content">A continuación, se muestran los renders del proyecto creados por el equipo de trabajo.</p>
+        </section>
+
+        <section class="image-group">
+            <img src="render1.jpg" alt="Render 1" onclick="openModal(this.src)">
+            <img src="render2.jpg" alt="Render 2" onclick="openModal(this.src)">
+            <img src="render3.jpg" alt="Render 3" onclick="openModal(this.src)">
+            <img src="render4.jpg" alt="Render 4" onclick="openModal(this.src)">
+            <img src="render5.jpg" alt="Render 5" onclick="openModal(this.src)">
+            <img src="render6.jpg" alt="Render 6" onclick="openModal(this.src)">
+            <img src="render7.jpg" alt="Render 7" onclick="openModal(this.src)">
+            <img src="render8.jpg" alt="Render 8" onclick="openModal(this.src)">
+            <img src="render9.jpg" alt="Render 9" onclick="openModal(this.src)">
+            <img src="render10.jpg" alt="Render 10" onclick="openModal(this.src)">
+            <img src="render11.jpg" alt="Render 11" onclick="openModal(this.src)">
+            <img src="render12.jpg" alt="Render 12" onclick="openModal(this.src)">
+            <img src="render13.jpg" alt="Render 13" onclick="openModal(this.src)">
+            <img src="render14.jpg" alt="Render 14" onclick="openModal(this.src)">
+            <img src="render15.jpg" alt="Render 15" onclick="openModal(this.src)">
+            <img src="render16.jpg" alt="Render 16" onclick="openModal(this.src)">
+            <img src="render17.jpg" alt="Render 17" onclick="openModal(this.src)">
+            <img src="render18.jpg" alt="Render 18" onclick="openModal(this.src)">
+        </section>
+
+    </main>
+
+    <footer>
+        <p class="contact-info"><p>Proyecto Reforma, 2024.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="arrow arrow-left" onclick="changeImage(-1)">&#10094;</span>
+        <img class="modal-content" id="img01">
+        <span class="arrow arrow-right" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        var currentImageIndex = 0;
+        var images = [];
+
+        function openModal(src) {
+            images = document.querySelectorAll('.image-group img');
+            currentImageIndex = Array.from(images).findIndex(img => img.src === src);
+
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img01");
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            var modalImg = document.getElementById("img01");
+            modalImg.src = images[currentImageIndex].src;
+        }
+    </script>
+
+</body>
+</html>
