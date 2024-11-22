@@ -3,209 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Reforma</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>Galería de compañeros</title>
     <style>
+        /* Estilos generales */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f0f5ff, #d9e4ff);
-            color: #333;
-        }
-
-        header {
-            background-color: #4a90e2;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin: 0;
-        }
-
-        header p {
-            font-size: 1.1em;
-            margin-top: 10px;
-        }
-
-        .description {
-            background-color: #d9e4ff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            text-align: justify;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        main {
-            padding: 40px 20px;
         }
 
         .section-title {
-            color: #4a90e2;
-            font-size: 2em;
             text-align: center;
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: #4a90e2;
-            margin: 10px auto 20px;
+            margin: 20px 0;
         }
 
         .image-group {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
+            margin: 20px;
         }
 
         .image-group img {
-            width: 200px;
+            width: 150px;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        footer {
-            background-color: #ffd1d1;
-            padding: 30px 20px;
-            text-align: center;
-            color: #771a1a;
+        .image-group img:hover {
+            transform: scale(1.1);
         }
 
-        footer p {
-            margin: 10px 0;
-        }
-
-        .contact-info {
-            font-size: 1em;
-            color: #771a1a;
-        }
-
-        /* Modal styles */
-        .modal {
+        /* Estilos para el modal */
+        #imageModal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             background-color: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
 
-        .modal-content {
+        #imageModal img {
             max-width: 90%;
             max-height: 90%;
-            object-fit: contain;
         }
 
-        .close {
-            color: white;
-            font-size: 40px;
+        #imageModal .close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            cursor: pointer;
-        }
-
-        .arrow {
-            color: white;
-            font-size: 50px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .arrow.left {
-            left: 20px;
-        }
-
-        .arrow.right {
+            top: 10px;
             right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-<header>
-    <h1>Proyecto Reforma</h1>
-    <p>Renders y propuestas de los compañeros</p>
-</header>
-<section class="description">
-    <p>
-        Este proyecto consiste en la reforma de una casa existente, desarrollada con clientes ficticios creados por los alumnos, 
-        cada uno con diferentes necesidades. A través de diversas propuestas, buscamos optimizar el espacio y la estética, 
-        adaptándonos a sus requerimientos específicos.
-    </p>
-</section>
-<main>
-    <!-- Sección para cada compañero -->
-    <section>
-        <h2 class="section-title">Compañero 1</h2>
-        <div class="image-group" data-group="compañero1">
-            <img src="render1.jpg" alt="Render 1 de Compañero 1" onclick="openModal(this)">
-            <img src="render2.jpg" alt="Render 2 de Compañero 1" onclick="openModal(this)">
-            <img src="render3.jpg" alt="Render 3 de Compañero 1" onclick="openModal(this)">
-            <img src="render4.jpg" alt="Render 4 de Compañero 1" onclick="openModal(this)">
-        </div>
-    </section>
-    <!-- Repite este bloque para cada compañero con data-group diferente -->
-</main>
-<footer>
-    <p>Proyecto Reforma, 2024.</p>
-</footer>
-<!-- Modal -->
-<div id="myModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <span class="arrow left" onclick="changeImage(-1)">&#10094;</span>
-    <img class="modal-content" id="img01">
-    <span class="arrow right" onclick="changeImage(1)">&#10095;</span>
-</div>
-<script>
-    let currentIndex = 0;
-    let currentGroup = [];
-    function openModal(img) {
-        const group = img.parentElement.getAttribute('data-group');
-        currentGroup = Array.from(document.querySelectorAll(`.image-group[data-group="${group}"] img`));
-        currentIndex = currentGroup.indexOf(img);
-        showImage();
-    }
+    <main>
+        <!-- Sección para cada compañero -->
+        <section>
+            <h2 class="section-title">Compañero 1</h2>
+            <div class="image-group" data-group="compañero1">
+                <img src="render1.jpg" alt="Render 1 de Compañero 1" onclick="openModal(this)">
+                <img src="render2.jpg" alt="Render 2 de Compañero 1" onclick="openModal(this)">
+                <img src="render3.jpg" alt="Render 3 de Compañero 1" onclick="openModal(this)">
+                <img src="render4.jpg" alt="Render 4 de Compañero 1" onclick="openModal(this)">
+            </div>
+        </section>
 
-    function showImage() {
-        const modal = document.getElementById("myModal");
-        const modalImg = document.getElementById("img01");
-        modal.style.display = "flex";
-        modalImg.src = currentGroup[currentIndex].src;
-    }
+        <!-- Repite las secciones para Compañeros 2-5 como antes -->
 
-    function closeModal() {
-        const modal = document.getElementById("myModal");
-        modal.style.display = "none";
-    }
+    </main>
 
-    function changeImage(direction) {
-        currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
-        showImage();
-    }
-</script>
+    <!-- Modal -->
+    <div id="imageModal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Imagen ampliada">
+    </div>
+
+    <script>
+        // Abre el modal y muestra la imagen
+        function openModal(image) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = image.src; // Usa la misma fuente de la imagen clickeada
+            modal.style.display = 'flex';
+        }
+
+        // Cierra el modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Cierra el modal si el usuario hace clic fuera de la imagen
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
