@@ -96,6 +96,7 @@
             color: #771a1a;
         }
 
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -157,7 +158,7 @@
     </p>
 </section>
 <main>
-    <!-- Bloques para 5 compañeros -->
+    <!-- Sección para cada compañero -->
     <section>
         <h2 class="section-title">Compañero 1</h2>
         <div class="image-group" data-group="compañero1">
@@ -167,27 +168,18 @@
             <img src="render4.jpg" alt="Render 4 de Compañero 1" onclick="openModal(this)">
         </div>
     </section>
-    <section>
-        <h2 class="section-title">Compañero 2</h2>
-        <div class="image-group" data-group="compañero2">
-            <img src="render1.jpg" alt="Render 1 de Compañero 2" onclick="openModal(this)">
-            <img src="render2.jpg" alt="Render 2 de Compañero 2" onclick="openModal(this)">
-        </div>
-    </section>
-    <section>
-        <h2 class="section-title">Compañero 3</h2>
-        <div class="image-group" data-group="compañero3">
-            <img src="render1.jpg" alt="Render 1 de Compañero 3" onclick="openModal(this)">
-        </div>
-    </section>
-    <section>
-        <h2 class="section-title">Compañero 4</h2>
-        <div class="image-group" data-group="compañero4">
-            <img src="render1.jpg" alt="Render 1 de Compañero 4" onclick="openModal(this)">
-            <img src="render2.jpg" alt="Render 2 de Compañero 4" onclick="openModal(this)">
-        </div>
-    </section>
+    <!-- Repite este bloque para cada compañero con data-group diferente -->
 </main>
+<footer>
+    <p>Proyecto Reforma, 2024.</p>
+</footer>
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <span class="arrow left" onclick="changeImage(-1)">&#10094;</span>
+    <img class="modal-content" id="img01">
+    <span class="arrow right" onclick="changeImage(1)">&#10095;</span>
+</div>
 <script>
     let currentIndex = 0;
     let currentGroup = [];
@@ -197,9 +189,22 @@
         currentIndex = currentGroup.indexOf(img);
         showImage();
     }
+
     function showImage() {
         const modal = document.getElementById("myModal");
         const modalImg = document.getElementById("img01");
+        modal.style.display = "flex";
+        modalImg.src = currentGroup[currentIndex].src;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    function changeImage(direction) {
+        currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
+        showImage();
     }
 </script>
 </body>
